@@ -17,9 +17,7 @@
 
             </soul-board>
             <soul-lift *ngIf="reqService.requirements.length == 0">
-                <label id="lbl">Seleziona File </label>
-                <input type='file' (change)="fileChanged($event)">
-                <button class="a-button a-button--primary" (click)="loadFile()">Carica</button>
+                <app-read-file></app-read-file>
             </soul-lift>
             <soul-lift *ngIf="reqService.requirements.length > 0">
                 <app-requirement *ngFor="let req of reqService.requirements" [reqElement]="req" (detailSelected)="detailSelected = $event"></app-requirement>

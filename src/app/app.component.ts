@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReService } from './re.service';
-import {parseString} from 'xml2js';
+
 
 @Component({
   selector: 'app-root',
@@ -11,80 +11,8 @@ import {parseString} from 'xml2js';
 export class AppComponent {
   title = 'Requify';
   detailSelected:Object = null;
-  file:File;
-  public xmlFile;
-
+  
   constructor(public reqService: ReService){};
-
-  fileChanged(e){
-    this.file = e.target.files[0];
-  }
-
-  loadFile() {
-    if(this.file){
-      let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-        this.xmlFile=fileReader.result;
-        this.parsingXML();
-        };
-      fileReader.readAsText(this.file);
-      this.file = null;
-    }
-    
-  }
-
-
-  parsingXML(){
-    var tempReq = {};
-    parseString(this.xmlFile, function(err, result) {
-      if (err) console.log(err);
-
-      // get id and name of requirements
-      for(let p of result["xmi:XMI"]["uml:Model"]["0"]["packagedElement"]){
-        if(p["$"]["name"] === "Requirements"){
-          for(let n of p["packagedElement"]){
-            tempReq[n['$']['xmi:id']] = {Name:n["$"]["name"]};
-            tempReq[n['$']['xmi:id']]["Constraints"] = [];
-          }
-        }
-      }
-      // get requirements text
-      for (let r of result["xmi:XMI"]["sysml:Requirement"]) {
-        tempReq[r["$"]["base_Class"]]["Text"] = r["$"]["Text"];
-
-      }
-      //get constraint of requirement
-      for(let p of result["xmi:XMI"]["uml:Model"]["0"]["packagedElement"]){
-        if(p["$"]["name"] === "Analysis"){
-          // get all the constraints id associated with the req
-          for(let n of p["packagedElement"]){
-            if(n["$"]["xmi:type"]==="uml:Abstraction"){
-              tempReq[n["supplier"][0]["$"]["xmi:idref"]]["Constraints"].push({IdConstraint:n["client"][0]["$"]["xmi:idref"], Value:""});
-            }
-          }
-          //get all the constraint name and value associated with the req
-          for(let n of p["packagedElement"]){
-            if( n["$"]["xmi:type"] === "uml:Class" ){
-              for(let t in tempReq){
-                for(let c in tempReq[t]["Constraints"]){
-                  if(n["$"]["xmi:id"] === tempReq[t]["Constraints"][c]["IdConstraint"]){
-                    tempReq[t]["Constraints"][c]["Name"] = n["$"]["name"];
-                    tempReq[t]["Constraints"][c]["Value"] = n["ownedRule"][0]["specification"][0]["body"][0];
-                  }
-                }
-              }  
-            }
-            
-          }
-        }
-      }
-  })
-  for(let t in tempReq){
-    this.reqService.addReq(tempReq[t]);
-  }
-     
-   console.log(this.reqService.requirements);
-  }  
 
   closeReq(){
     this.reqService.requirements = [];

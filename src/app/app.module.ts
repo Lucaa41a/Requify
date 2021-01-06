@@ -9,6 +9,7 @@ import { RequirementComponent } from './requirement/requirement.component';
 import { ReService } from './re.service';
 import { TreeNavigationComponent } from './tree-navigation/tree-navigation.component';
 import { ReqDetailComponent } from './req-detail/req-detail.component';
+import { ReadFileComponent } from './read-file/read-file.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReqDetailComponent } from './req-detail/req-detail.component';
     RequirementComponent,
     TreeNavigationComponent,
     ReqDetailComponent,
+    ReadFileComponent,
     
   ],
   imports: [
