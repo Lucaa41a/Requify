@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {ReService} from '../re.service';
 import { parseString } from 'xml2js';
 
@@ -8,8 +8,10 @@ import { parseString } from 'xml2js';
   styleUrls: ['./read-file.component.scss']
 })
 export class ReadFileComponent implements OnInit {
+  @Input() type:String; 
   file:File;
   public xmlFile;
+  split:String[];
   constructor(private reqService: ReService) { }
 
   ngOnInit(): void {
@@ -20,15 +22,26 @@ export class ReadFileComponent implements OnInit {
   }
 
   loadFile() {
-    if(this.file){
-      let fileReader = new FileReader();
+    this.split = (this.file.name).split(".");
+    if(this.file && this.type=="XML"){
+      if(this.split[this.split.length-1]=="xml"){
+        let fileReader = new FileReader();
         fileReader.onload = (e) => {
-        this.xmlFile=fileReader.result;
-        this.parsingXML();
-        };
-      fileReader.readAsText(this.file);
-      this.file = null;
-    }
+          this.xmlFile=fileReader.result;
+          this.parsingXML();
+          };
+        fileReader.readAsText(this.file);
+        this.file = null; 
+      } else {
+        alert("Il file inserito non è corretto.");
+      }
+    } else{ if(this.file && this.type=="json"){
+      if(this.split[this.split.length-1]=="json"){
+        console.log("json");
+      }
+    }}
+
+    
     
   }
 
