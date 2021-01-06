@@ -1,0 +1,43 @@
+/*------------------------------------*\
+  $SOUL-CORE
+\*------------------------------------*/
+
+@use '~@esteco/soul/ui/soul-modules/core';
+
+/*------------------------------------*\
+  $SOUL-RESET
+\*------------------------------------*/
+
+@use '~@esteco/soul/ui/soul-modules/reset';
+
+/*------------------------------------*\
+  $SOUL-THEMES
+\*------------------------------------*/
+
+@use '~@esteco/soul/ui/soul-modules/themes' with ( $themes: ('volta-default', 'volta-blue'));
+
+/*------------------------------------*\
+  $SOUL-COMPONENTS
+\*------------------------------------*/
+
+@use '~@esteco/soul/ui/soul-modules/components';
+
+/*------------------------------------*\
+  $SOUL-COMPONENTS-CATEGORIES
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+  $PUT-HERE-YOUR-STYLES
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+  $SOUL-ESSENTIALS
+  Make sure this import is always the last
+\*------------------------------------*/
+
+@use '~@esteco/soul/ui/soul-modules/essentials';
+.myClass {
+    background-color: core.$soul-color-background-alternative;
+}

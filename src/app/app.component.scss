@@ -1,0 +1,13 @@
+@use '~@esteco/soul/ui/soul-modules/core';
+soul-lift {
+    padding: core.$soul-space-squish-m;
+}
+
+h2 {
+    color: core.$soul-color-text-header;
+    display: inline-block;
+}
+
+soul-board {
+    padding: core.$soul-space-squish-s;
+}

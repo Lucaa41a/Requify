@@ -1,0 +1,17 @@
+<soul-modal title="Yosemite National Park" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
+    <soul-modal-content>
+        <div class="l-flag">
+            <div class="l-flag__body">
+                <p>Seleziona parametri</p>
+            </div>
+        </div>
+    </soul-modal-content>
+    <soul-modal-footer>
+        <div class="soul-button-group  soul-button-group--separated">
+            <button class="a-button  a-button--primary" (click)="close()">Ok</button>
+            <button class="a-button  a-button--ghost" (click)="close()">Annulla</button>
+        </div>
+    </soul-modal-footer>
+</soul-modal>
+
+<button class="a-button a-button--primary" (click)="open()">Nuova Analisi</button>
