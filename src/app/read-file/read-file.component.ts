@@ -11,6 +11,7 @@ export class ReadFileComponent implements OnInit {
   @Input() type:String; 
   file:File;
   public xmlFile;
+  public jsonFile;
   split:String[];
   constructor(private reqService: ReService) { }
 
@@ -35,9 +36,16 @@ export class ReadFileComponent implements OnInit {
       } else {
         alert("Il file inserito non è corretto.");
       }
+
     } else{ if(this.file && this.type=="json"){
       if(this.split[this.split.length-1]=="json"){
-        console.log("json");
+        let fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          console.log(fileReader.result);
+          this.jsonFile = JSON.parse((String)(fileReader.result));
+          console.log(this.jsonFile);
+          };
+        fileReader.readAsText(this.file);
       }
     }}
 
