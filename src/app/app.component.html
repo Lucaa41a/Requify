@@ -1,8 +1,8 @@
 <app-tree-navigation *ngIf="reqService.requirements.length > 1110"></app-tree-navigation>
 <div class="l-grid  l-grid--narrow soul-space-inset-m">
     <div class="l-grid__item  l-one-third">
-        <soul-shelf class="h-shadow-m">
-            <soul-board class="h-shadow-s">
+        <soul-shelf class="h-shadow-m" style="height:95vh;">
+            <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Requisiti</h2>
 
                 <div style="float:right" *ngIf="reqService.requirements.length > 0">
@@ -16,23 +16,28 @@
                 </div>
 
             </soul-board>
-            <soul-lift *ngIf="reqService.requirements.length == 0">
-                <app-read-file></app-read-file>
-            </soul-lift>
-            <soul-lift *ngIf="reqService.requirements.length > 0">
+            <soul-lift style="height:50vh;">
+                <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
                 <app-requirement *ngFor="let req of reqService.requirements" [reqElement]="req" (detailSelected)="detailSelected = $event"></app-requirement>
             </soul-lift>
 
-            <soul-board class="h-shadow-s">
+            <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Analisi</h2>
+                <div style="float:right" *ngIf="reqService.requirements.length > 0">
+                    <div class="m-field">
+                        <div class="m-field__value">
+                            <button class="a-button a-button--ghost a-button--pull-right" (click)=closeReq()>
+                                <span class="a-icon a-icon--close"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </soul-board>
-            <soul-lift>
-                <div>
-                    <app-read-file></app-read-file>
-                </div>
-                <div>
-                    <doc-modal-neutral></doc-modal-neutral>
-                </div>
+            <soul-lift style="height:35vh;">
+
+                <app-read-file [type]="'json'"></app-read-file>
+
+                <doc-modal-neutral></doc-modal-neutral>
 
             </soul-lift>
         </soul-shelf>
