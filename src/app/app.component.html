@@ -34,10 +34,14 @@
                 </div>
             </soul-board>
             <soul-lift style="height:35vh;">
+                <div *ngIf="!analysisService.analysisJSON">
+                    <app-read-file [type]="'json'"></app-read-file>
+                    <doc-modal-neutral></doc-modal-neutral>
+                </div>
+                <div *ngIf="analysisService.analysisJSON">
+                    <p *ngFor="let obj of analysisService.analysisJSON[0]">{{obj}}</p>
+                </div>
 
-                <app-read-file [type]="'json'"></app-read-file>
-
-                <doc-modal-neutral></doc-modal-neutral>
 
             </soul-lift>
         </soul-shelf>

@@ -10,6 +10,7 @@ import { ReService } from './re.service';
 import { TreeNavigationComponent } from './tree-navigation/tree-navigation.component';
 import { ReqDetailComponent } from './req-detail/req-detail.component';
 import { ReadFileComponent } from './read-file/read-file.component';
+import { AnalysisService } from './analysis.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ReadFileComponent } from './read-file/read-file.component';
     SoulModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [ReService],
+  providers: [ReService, AnalysisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

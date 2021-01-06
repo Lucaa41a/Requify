@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnalysisService } from './analysis.service';
 import { ReService } from './re.service';
 
 
@@ -12,7 +13,7 @@ export class AppComponent {
   title = 'Requify';
   detailSelected:Object = null;
   
-  constructor(public reqService: ReService){};
+  constructor(public reqService: ReService, public analysisService:AnalysisService){};
 
   closeReq(){
     this.reqService.requirements = [];

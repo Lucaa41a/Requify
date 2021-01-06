@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {ReService} from '../re.service';
+import {AnalysisService} from '../analysis.service';
 import { parseString } from 'xml2js';
 
 @Component({
@@ -11,9 +12,8 @@ export class ReadFileComponent implements OnInit {
   @Input() type:String; 
   file:File;
   public xmlFile;
-  public jsonFile;
   split:String[];
-  constructor(private reqService: ReService) { }
+  constructor(private reqService: ReService, private analysisService: AnalysisService) { }
 
   ngOnInit(): void {
   }
@@ -41,11 +41,11 @@ export class ReadFileComponent implements OnInit {
       if(this.split[this.split.length-1]=="json"){
         let fileReader = new FileReader();
         fileReader.onload = (e) => {
-          console.log(fileReader.result);
-          this.jsonFile = JSON.parse((String)(fileReader.result));
-          console.log(this.jsonFile);
+          this.analysisService.saveJSON(JSON.parse((String)(fileReader.result)));
+          console.log(this.analysisService.analysisJSON[0]);
           };
         fileReader.readAsText(this.file);
+        
       }
     }}
 
