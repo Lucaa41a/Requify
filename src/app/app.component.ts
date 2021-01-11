@@ -19,5 +19,10 @@ export class AppComponent {
     this.reqService.requirements = [];
     this.detailSelected=null;
   }
+
+  closeAnalysis(){
+    this.analysisService.analysisJSON = null;
+    this.detailSelected=null;
+  }
 }
 

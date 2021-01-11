@@ -23,10 +23,10 @@
 
             <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Analisi</h2>
-                <div style="float:right" *ngIf="reqService.requirements.length > 0">
+                <div style="float:right" *ngIf="analysisService.analysisJSON">
                     <div class="m-field">
                         <div class="m-field__value">
-                            <button class="a-button a-button--ghost a-button--pull-right" (click)=closeReq()>
+                            <button class="a-button a-button--ghost a-button--pull-right" (click)=closeAnalysis()>
                                 <span class="a-icon a-icon--close"></span>
                             </button>
                         </div>
@@ -39,7 +39,7 @@
                     <doc-modal-neutral></doc-modal-neutral>
                 </div>
                 <div *ngIf="analysisService.analysisJSON">
-                    <p *ngFor="let obj of analysisService.analysisJSON[0]">{{obj}}</p>
+                    <p>{{analysisService.analysisJSON[0]}}</p>
                 </div>
 
 
@@ -48,7 +48,7 @@
     </div>
 
     <div class="l-grid__item  l-one-half">
-        <soul-shelf class="h-shadow-m">
+        <soul-shelf class="h-shadow-m" style="height:95vh;">
             <soul-board class="h-shadow-s">
                 <h2>Dettagli</h2>
             </soul-board>
