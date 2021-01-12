@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   closeAnalysis(){
-    this.analysisService.analysisJSON = null;
+    this.analysisService.analysis = [];
     this.detailSelected=null;
   }
 }

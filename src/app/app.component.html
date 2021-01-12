@@ -23,7 +23,7 @@
 
             <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Analisi</h2>
-                <div style="float:right" *ngIf="analysisService.analysisJSON">
+                <div style="float:right" *ngIf="analysisService.analysis.length>0">
                     <div class="m-field">
                         <div class="m-field__value">
                             <button class="a-button a-button--ghost a-button--pull-right" (click)=closeAnalysis()>
@@ -34,12 +34,14 @@
                 </div>
             </soul-board>
             <soul-lift style="height:35vh;">
-                <div *ngIf="!analysisService.analysisJSON">
-                    <app-read-file [type]="'json'"></app-read-file>
+                <div *ngIf="analysisService.analysis.length==0">
+                    <p>Seleziona il file csv da caricare</p>
+                    <app-read-file [type]="'csv'"></app-read-file>
                     <doc-modal-neutral></doc-modal-neutral>
                 </div>
-                <div *ngIf="analysisService.analysisJSON">
-                    <p>{{analysisService.analysisJSON[0]}}</p>
+                <div *ngIf="analysisService.analysis.length>0">
+                    <p>{{analysisService.header[3]}}</p>
+                    <p *ngFor="let line of analysisService.analysis">{{line[3]}}</p>
                 </div>
 
 

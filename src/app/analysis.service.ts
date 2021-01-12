@@ -4,10 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AnalysisService {
-    analysisJSON;
+    header = [];
+    analysisOBJ = [];
+    analysis = [];
 
-    saveJSON(analysis:any){
-        this.analysisJSON = analysis;
-    
+    addData(data:any){
+        this.header = data[0];
+        for(var i=1; i< data.length; i++){
+          this.analysis.push(data[i]);
+        }
     }
+
+    
 }

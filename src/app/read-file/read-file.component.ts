@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {ReService} from '../re.service';
 import {AnalysisService} from '../analysis.service';
 import { parseString } from 'xml2js';
+import { parse } from 'papaparse';
 
 @Component({
   selector: 'app-read-file',
@@ -37,23 +38,28 @@ export class ReadFileComponent implements OnInit {
         alert("Il file inserito non è corretto.");
       }
 
-    } else{ if(this.file && this.type=="json"){
-      if(this.split[this.split.length-1]=="json"){
-        let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-          this.analysisService.saveJSON(JSON.parse((String)(fileReader.result)));
-          console.log(this.analysisService.analysisJSON[0]);
-          };
-        fileReader.readAsText(this.file);
-        
+    } else{ if(this.file && this.type=="csv"){
+      if(this.split[this.split.length-1]=="csv"){
+        // crea una lista di oggetti chiave:valore
+        parse(this.file, {
+          header: true,
+          complete: (results) => {
+            this.analysisService.analysisOBJ = results.data;
+          }
+        });
+
+        // crea una lista di array con i valori
+        parse(this.file, {
+          complete: (results) => {
+            this.analysisService.addData(results.data);
+          }
+        });
+
+      } else {
+        alert("Il file inserito non è corretto.");
       }
-    }}
-
-    
-    
+    }} 
   }
-
-
   parsingXML(){
     var tempReq = {};
     parseString(this.xmlFile, function(err, result) {
