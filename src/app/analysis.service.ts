@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AnalysisService {
     header = [];
-    analysisOBJ = [];
+ //   analysisOBJ = [];
     analysis = [];
 
     addData(data:any){
@@ -13,6 +13,11 @@ export class AnalysisService {
         for(var i=1; i< data.length; i++){
           this.analysis.push(data[i]);
         }
+    }
+
+    close(){
+      this.header = [];
+      this.analysis = [];
     }
 
     

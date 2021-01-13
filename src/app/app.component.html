@@ -18,7 +18,7 @@
             </soul-board>
             <soul-lift style="height:50vh;">
                 <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
-                <app-requirement *ngFor="let req of reqService.requirements" [reqElement]="req" (detailSelected)="detailSelected = $event"></app-requirement>
+                <app-requirement *ngFor="let req of reqService.requirements" [reqElement]="req" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:40px;">
@@ -40,11 +40,8 @@
                     <doc-modal-neutral></doc-modal-neutral>
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
-                    <p>{{analysisService.header[3]}}</p>
-                    <p *ngFor="let line of analysisService.analysis">{{line[3]}}</p>
+                    <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
                 </div>
-
-
             </soul-lift>
         </soul-shelf>
     </div>
@@ -55,8 +52,8 @@
                 <h2>Dettagli</h2>
             </soul-board>
             <soul-lift>
-                <app-req-detail [detail]="detailSelected">
-                </app-req-detail>
+                <app-req-detail *ngIf="!showAnalysis" [detail]="detailSelected"></app-req-detail>
+                <app-analysis-detail *ngIf="showAnalysis"></app-analysis-detail>
             </soul-lift>
         </soul-shelf>
 

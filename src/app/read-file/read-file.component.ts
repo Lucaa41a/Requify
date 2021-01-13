@@ -40,18 +40,19 @@ export class ReadFileComponent implements OnInit {
 
     } else{ if(this.file && this.type=="csv"){
       if(this.split[this.split.length-1]=="csv"){
-        // crea una lista di oggetti chiave:valore
+       /*
         parse(this.file, {
           header: true,
           complete: (results) => {
             this.analysisService.analysisOBJ = results.data;
           }
         });
-
+*/
         // crea una lista di array con i valori
         parse(this.file, {
           complete: (results) => {
             this.analysisService.addData(results.data);
+            console.log(this.analysisService.analysis);
           }
         });
 

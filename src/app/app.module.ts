@@ -11,6 +11,7 @@ import { TreeNavigationComponent } from './tree-navigation/tree-navigation.compo
 import { ReqDetailComponent } from './req-detail/req-detail.component';
 import { ReadFileComponent } from './read-file/read-file.component';
 import { AnalysisService } from './analysis.service';
+import { AnalysisDetailComponent } from './analysis-detail/analysis-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AnalysisService } from './analysis.service';
     TreeNavigationComponent,
     ReqDetailComponent,
     ReadFileComponent,
+    AnalysisDetailComponent,
     
   ],
   imports: [

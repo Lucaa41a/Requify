@@ -12,6 +12,7 @@ import { ReService } from './re.service';
 export class AppComponent {
   title = 'Requify';
   detailSelected:Object = null;
+  showAnalysis:boolean = false;
   
   constructor(public reqService: ReService, public analysisService:AnalysisService){};
 
@@ -21,8 +22,10 @@ export class AppComponent {
   }
 
   closeAnalysis(){
-    this.analysisService.analysis = [];
+    this.analysisService.close();
     this.detailSelected=null;
+    this.showAnalysis = false;
   }
+
 }
 
