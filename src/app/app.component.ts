@@ -18,12 +18,12 @@ export class AppComponent {
 
   closeReq(){
     this.reqService.requirements = [];
-    this.detailSelected=null;
+    this.detailSelected = null;
   }
 
   closeAnalysis(){
     this.analysisService.close();
-    this.detailSelected=null;
+    this.detailSelected = null;
     this.showAnalysis = false;
   }
 
