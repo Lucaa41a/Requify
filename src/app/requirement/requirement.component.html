@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <ol class="l-block-list  l-block-list--box">
-            <li class="l-block-list__item h-cursor-pointer" (click)="showDetail()">{{reqEl.Name}}</li>
+            <li class="l-block-list__item h-cursor-pointer" (click)="showDetail()" [ngStyle]="isSelected()?{'background-color': 'hsl(125, 39%, 94%)' }:{}">{{req.Name}} </li>
 
             <!--          <ul *ngFor="let c of reqEl.Constraints" class="l-block-list">
                 <li class="l-block-list__item"># {{c.Name}}: {{c.Value}}</li>

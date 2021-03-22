@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class ReService{
+export class ReqService{
     requirements = [];
+    
 
     addReq(req:any){
-        this.requirements.push(req);
-    
+        this.requirements.push(req);   
     }
 
 

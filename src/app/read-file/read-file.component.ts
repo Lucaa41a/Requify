@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ReService} from '../re.service';
+import {ReqService} from '../req.service';
 import {AnalysisService} from '../analysis.service';
 import { parseString } from 'xml2js';
 import { parse } from 'papaparse';
@@ -14,7 +14,7 @@ export class ReadFileComponent implements OnInit {
   file:File;
   public xmlFile;
   split:String[];
-  constructor(private reqService: ReService, private analysisService: AnalysisService) { }
+  constructor(private reqService: ReqService, private analysisService: AnalysisService) { }
 
   ngOnInit(): void {
   }
@@ -24,42 +24,38 @@ export class ReadFileComponent implements OnInit {
   }
 
   loadFile() {
-    this.split = (this.file.name).split(".");
-    if(this.file && this.type=="XML"){
-      if(this.split[this.split.length-1]=="xml"){
-        let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-          this.xmlFile=fileReader.result;
-          this.parsingXML();
-          };
-        fileReader.readAsText(this.file);
-        this.file = null; 
-      } else {
-        alert("Il file inserito non è corretto.");
-      }
+    if(this.file === undefined){
+      alert("Nessun file selezionato");
+    } else {
+      this.split = (this.file.name).split(".");
 
-    } else{ if(this.file && this.type=="csv"){
-      if(this.split[this.split.length-1]=="csv"){
-       /*
-        parse(this.file, {
-          header: true,
-          complete: (results) => {
-            this.analysisService.analysisOBJ = results.data;
-          }
-        });
-*/
-        // crea una lista di array con i valori
-        parse(this.file, {
-          complete: (results) => {
-            this.analysisService.addData(results.data);
-            console.log(this.analysisService.analysis);
-          }
-        });
+      if(this.file && this.type=="XML"){
+        if(this.split[this.split.length-1]=="xml"){       // it's a SysML file
+          let fileReader = new FileReader();
+          fileReader.onload = (e) => {
+            this.xmlFile=fileReader.result;
+            this.parsingXML();
+            };
+          fileReader.readAsText(this.file);
+          this.file = null; 
+        } else {
+          alert("Il file inserito non è corretto.");
+        }
 
-      } else {
-        alert("Il file inserito non è corretto.");
-      }
-    }} 
+      } else{ if(this.file && this.type=="csv"){        
+        if(this.split[this.split.length-1]=="csv"){     // it's a result file
+          parse(this.file, {
+            complete: (results) => {
+              this.analysisService.addData(results.data);
+              console.log(this.analysisService.analysis);
+            }
+          });
+
+        } else {
+          alert("Il file inserito non è corretto.");
+        }
+      }} 
+    }
   }
   parsingXML(){
     var tempReq = {};
@@ -107,6 +103,7 @@ export class ReadFileComponent implements OnInit {
       }
   })
   for(let t in tempReq){
+    tempReq[t]["Selected"] = false;           // flag if the requirement is selected for the analysis
     this.reqService.addReq(tempReq[t]);
   }
      

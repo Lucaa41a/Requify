@@ -5,13 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class AnalysisService {
     header = [];
- //   analysisOBJ = [];
     analysis = [];
 
     addData(data:any){
         this.header = data[0];
+        console.log(data.length);
         for(var i=1; i< data.length; i++){
-          this.analysis.push(data[i]);
+          if(data[i]==""){
+            // this row is empty
+          } else {
+            this.analysis.push(data[i]);
+          }
+          
         }
     }
 

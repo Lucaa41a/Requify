@@ -1,0 +1,32 @@
+<soul-modal title="Seleziona i requisiti da verificare" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
+    <soul-modal-content>
+        <div class="l-flag">
+            <div class="l-flag__body">
+                <ol class="l-block-list  l-block-list--box" id="reqList">
+                    <li class="l-block-list__item h-cursor-pointer" *ngFor="let req of reqService.requirements; let i = index">
+                        <label class="c-checkbox">
+                            <input type="checkbox" name="req.Name" value="req.Name" class="c-checkbox__input">
+                            <span class="c-checkbox__check"></span>
+                            <span class="c-checkbox__label">
+                                <span class="a-label">
+                                <p>{{req.Name}}</p>
+                                </span>
+                            </span>
+                        </label>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+    </soul-modal-content>
+    <soul-modal-footer>
+        <div class="soul-button-group soul-button-group--separated ">
+            <button class="a-button a-button--primary " (click)="updateSelected()">Ok</button>
+            <button class="a-button a-button--ghost " (click)="close() ">Annulla</button>
+        </div>
+    </soul-modal-footer>
+</soul-modal>
+
+
+<button class="a-button a-button--primary " (click)="open() ">Seleziona i requisiti da verificare</button>
