@@ -31,7 +31,7 @@ export class ModalSelectReqComponent implements OnInit {
     for (var i=0; i< list.length; i++){
       var inputList = list[i].getElementsByTagName("input");
       for (var j=0; j< inputList.length; j++){
-        this.reqService.requirements[i].Selected = inputList[j].checked;
+        this.reqService.requirements[i].selected = inputList[j].checked;
       }
     }
 

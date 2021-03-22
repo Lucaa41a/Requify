@@ -23,7 +23,6 @@ export class RequirementComponent implements OnInit {
   }
 
   isSelected(){
-  //  console.log(this.reqService.requirements[this.reqEl].Selected);
-    return this.reqService.requirements[this.reqEl].Selected;
+    return this.reqService.requirements[this.reqEl].selected;
   }
 }

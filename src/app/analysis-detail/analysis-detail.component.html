@@ -19,7 +19,7 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let row of analysisService.analysis" class="soul-table-row" [ngStyle]="verify(row)?{'background-color':'hsl(45, 90%, 88%)'}:{}">
+            <tr *ngFor="let row of analysisService.analysis; let i = index " class="soul-table-row" [ngStyle]="verify(row, i)?{}:{'background-color':'hsl(45, 90%, 88%)'}">
                 <!--
                 <td class="soul-table-cell">
                     <label class="c-checkbox">

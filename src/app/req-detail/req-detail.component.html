@@ -1,10 +1,10 @@
-<div *ngIf="detail && detail.Name">
-    <h3>{{detail.Name}}</h3>
-    <p>{{detail.Text}}</p>
-    <div *ngIf="detail.Constraints.length >0">
+<div *ngIf="detail && detail.name">
+    <h3>{{detail.name}}</h3>
+    <p>{{detail.text}}</p>
+    <div *ngIf="detail.constraints.length >0">
         <h4 class="soul-space-stack-top-m">Constraints</h4>
-        <ul *ngFor="let c of detail.Constraints" class="l-block-list">
-            <li class="l-block-list__item"> {{c.Name}}: {{c.Value}}</li>
+        <ul *ngFor="let c of detail.constraints" class="l-block-list">
+            <li class="l-block-list__item"> {{c.name}}: {{c.value}}</li>
         </ul>
     </div>
 

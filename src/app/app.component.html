@@ -19,6 +19,7 @@
             <soul-lift style="height:50vh;">
                 <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
                 <app-requirement *ngFor="let req of reqService.requirements; let i = index" [reqElement]="i" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
+                <app-modal-select-req *ngIf="reqService.requirements.length > 0"></app-modal-select-req>
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:40px;">
@@ -41,7 +42,7 @@
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
                     <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
-                    <app-modal-select-req *ngIf="reqService.requirements.length > 0"></app-modal-select-req>
+
                 </div>
             </soul-lift>
         </soul-shelf>

@@ -9,10 +9,12 @@ import { ReqService } from '../req.service';
 })
 export class AnalysisDetailComponent implements OnInit {
 
-  t:number = 0;
+  errorFlag:boolean = false;
+  missingParam:string [];
 
   constructor(public analysisService: AnalysisService, public reqService: ReqService) { }
   ngOnInit(): void {
+    console.log("cacca");
   }
 
   format(value){
@@ -25,8 +27,7 @@ export class AnalysisDetailComponent implements OnInit {
     }
   }
 
-  verify(row){
-    this.t++;
+  verify(row, index){
     var variableString = "";
     for (var i = 0; i< row.length; i++){
       if(row[i]==""){
@@ -38,16 +39,42 @@ export class AnalysisDetailComponent implements OnInit {
     var feasible = true;
 
     for ( var i = 0; i < this.reqService.requirements.length; i++){
-      if (this.reqService.requirements[i].Selected){
-        for (var j in this.reqService.requirements[i].Constraints){
-          //    console.log(variableString + this.reqService.requirements[i].Constraints[j].Value);
-
-          // controllo eval
-          feasible = feasible && eval(variableString + this.reqService.requirements[i].Constraints[j].Value+";");
+      if (this.reqService.requirements[i].selected){
+        for (var j in this.reqService.requirements[i].constraints){
+          // check if the constrait has a correct formulation 
+          if( this.check(variableString + this.reqService.requirements[i].constraints[j].value+";")){
+            feasible = feasible && eval(variableString + this.reqService.requirements[i].constraints[j].value+";");
+          } else {
+            return false;
+          }   
         }
       }
     }
-
-    return !feasible;
+    return feasible;
   }
+
+
+  // check if the string can be evaluated and if it can't alert the user, only for the first row
+  check( stringEval:string ){
+    try{
+      var check = eval(stringEval);
+    } catch (err){
+      if(!this.errorFlag){
+        var mess = err.message.split(" ");
+        if(mess[2]+mess[3] ==="notdefined"){
+          alert(mess[0]+" è un parametro non presente nei risultati.");
+
+        } else {
+          alert("Il formato della formula non è corretto.");
+        }
+        this.errorFlag = true;
+        return false;
+      }
+      return false;
+    }
+    this.errorFlag = false;
+    return true;
+  }
+
+
 }

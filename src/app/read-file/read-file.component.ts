@@ -66,14 +66,14 @@ export class ReadFileComponent implements OnInit {
       for(let p of result["xmi:XMI"]["uml:Model"]["0"]["packagedElement"]){
         if(p["$"]["name"] === "Requirements"){
           for(let n of p["packagedElement"]){
-            tempReq[n['$']['xmi:id']] = {Name:n["$"]["name"]};
-            tempReq[n['$']['xmi:id']]["Constraints"] = [];
+            tempReq[n['$']['xmi:id']] = {name:n["$"]["name"]};
+            tempReq[n['$']['xmi:id']]["constraints"] = [];
           }
         }
       }
       // get requirements text
       for (let r of result["xmi:XMI"]["sysml:Requirement"]) {
-        tempReq[r["$"]["base_Class"]]["Text"] = r["$"]["Text"];
+        tempReq[r["$"]["base_Class"]]["text"] = r["$"]["Text"];
 
       }
       //get constraint of requirement
@@ -82,17 +82,17 @@ export class ReadFileComponent implements OnInit {
           // get all the constraints id associated with the req
           for(let n of p["packagedElement"]){
             if(n["$"]["xmi:type"]==="uml:Abstraction"){
-              tempReq[n["supplier"][0]["$"]["xmi:idref"]]["Constraints"].push({IdConstraint:n["client"][0]["$"]["xmi:idref"], Value:""});
+              tempReq[n["supplier"][0]["$"]["xmi:idref"]]["constraints"].push({IdConstraint:n["client"][0]["$"]["xmi:idref"], value:""});
             }
           }
           //get all the constraint name and value associated with the req
           for(let n of p["packagedElement"]){
             if( n["$"]["xmi:type"] === "uml:Class" ){
               for(let t in tempReq){
-                for(let c in tempReq[t]["Constraints"]){
-                  if(n["$"]["xmi:id"] === tempReq[t]["Constraints"][c]["IdConstraint"]){
-                    tempReq[t]["Constraints"][c]["Name"] = n["$"]["name"];
-                    tempReq[t]["Constraints"][c]["Value"] = n["ownedRule"][0]["specification"][0]["body"][0];
+                for(let c in tempReq[t]["constraints"]){
+                  if(n["$"]["xmi:id"] === tempReq[t]["constraints"][c]["IdConstraint"]){
+                    tempReq[t]["constraints"][c]["name"] = n["$"]["name"];
+                    tempReq[t]["constraints"][c]["value"] = n["ownedRule"][0]["specification"][0]["body"][0];
                   }
                 }
               }  
@@ -103,7 +103,7 @@ export class ReadFileComponent implements OnInit {
       }
   })
   for(let t in tempReq){
-    tempReq[t]["Selected"] = false;           // flag if the requirement is selected for the analysis
+    tempReq[t]["selected"] = false;           // flag if the requirement is selected for the analysis
     this.reqService.addReq(tempReq[t]);
   }
      
