@@ -26,9 +26,13 @@ export class RequirementComponent implements OnInit {
     var style = {};
     if(this.reqService.requirements[this.reqEl].selected){
       style["backgroundColor"] = 'hsl(125, 39%, 94%)';
-    } 
-    if(!this.req.formulation){
+    } else{
+      style["backgroundColor"] = '';
+    }
+    if(!this.req.formulation || this.req.missingParam.length>0){
       style["color"] = 'red';
+    } else {
+      style["color"] = '';
     }
     return style;
   }

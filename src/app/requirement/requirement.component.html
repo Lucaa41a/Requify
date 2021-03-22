@@ -5,11 +5,7 @@
 
                 {{req.name}}
 
-                <!-- error the first time lenght>0, meaby a new component to show the droplist? droplist soul?  -->
 
-                <select style="float: right;" *ngIf="req.missingParam.length>0">
-                    <option *ngFor="let par of req.missingParam"> {{par}}</option> 
-                </select>
 
             </li>
         </ol>
