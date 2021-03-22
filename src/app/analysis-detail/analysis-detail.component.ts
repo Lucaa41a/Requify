@@ -9,10 +9,7 @@ import { ReqService } from '../req.service';
 })
 export class AnalysisDetailComponent implements OnInit {
 
-  errorFlag:boolean = false;
-
-
-  constructor(public analysisService: AnalysisService, public reqService: ReqService) { }
+  constructor(public analysisService: AnalysisService, public reqService: ReqService) {}
   ngOnInit(): void {
   }
 
@@ -55,9 +52,6 @@ export class AnalysisDetailComponent implements OnInit {
         }
       }
     }
-    if(reqSelected == 0 && index == this.reqService.requirements.length +1){    
-      this.errorFlag = false;       // reset the errorFlag in the last row if no requirement is selected
-    }
     return feasible;
   }
 
@@ -74,30 +68,8 @@ export class AnalysisDetailComponent implements OnInit {
         this.errorFormulation(index);
       }
       return false;
-
-      /*
-      if(this.errorFlag){
-
-        //check if there is a new not defined parameter
-        if(mess[2]+mess[3] === "notdefined"){          
-          //  alert(mess[0]+" è un parametro non presente nei risultati.");
-          }
-        return false;
-      } else {
-        if(mess[2]+mess[3] ==="notdefined"){
-       //   alert(mess[0]+" è un parametro non presente nei risultati.");
-          this.reqService.requirements[index].missingParam.push(mess[0]);
-        } else {
-          alert("Il formato della formula non è corretto.");
-        }
-        this.errorFlag = true;
-        return false;
-      }*/
     } 
-
-    this.errorFlag = false;
     return true;
-   
   }
 
   addMissingParam(param:string, index:number){
