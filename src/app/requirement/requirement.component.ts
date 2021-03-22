@@ -22,7 +22,14 @@ export class RequirementComponent implements OnInit {
     this.detailSelected.emit(this.reqService.requirements[this.reqEl]);
   }
 
-  isSelected(){
-    return this.reqService.requirements[this.reqEl].selected;
+  getStyle(){
+    var style = {};
+    if(this.reqService.requirements[this.reqEl].selected){
+      style["backgroundColor"] = 'hsl(125, 39%, 94%)';
+    } 
+    if(!this.req.formulation){
+      style["color"] = 'red';
+    }
+    return style;
   }
 }
