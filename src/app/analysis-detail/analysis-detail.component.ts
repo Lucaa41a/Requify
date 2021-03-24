@@ -25,16 +25,23 @@ export class AnalysisDetailComponent implements OnInit {
 
   verify(row, index){
     var variableString = "";
-    for (var i = 0; i< row.length; i++){
-      if(row[i]==""){
-        variableString = variableString + "var " +this.analysisService.header[i] +"="+ "null" + ";";
-      } else{
-        variableString = variableString + "var "+ this.analysisService.header[i] +"="+ row[i] + ";";
-      }     
-    }
     var feasible = true;
     var reqSelected = 0;
     var checked = false;
+    for (var i = 0; i< row.length; i++){
+      if(row[i]=="" || row[i]==="NA"){           //the solution is not complete so it's not verified
+        return false;
+      }      
+      if( isNaN(row[i]) ){
+        variableString = variableString + "var " +this.analysisService.header[i] +"="+ "null" + ";";
+      } else{
+        variableString = variableString + "var "+ this.analysisService.header[i] +"="+ row[i] + ";";
+      }    
+      
+   //   variableString = variableString + "var "+ this.analysisService.header[i] +"="+ row[i] + ";";
+    }
+    variableString = variableString.replace(/,/g, ".");
+   
     for ( var i = 0; i < this.reqService.requirements.length; i++){
       if (this.reqService.requirements[i].selected){
         reqSelected++;
@@ -65,6 +72,7 @@ export class AnalysisDetailComponent implements OnInit {
       if(mess[2]+mess[3] === "notdefined"){          
         this.addMissingParam(mess[0], index);
       } else {
+        console.log(stringEval);
         this.errorFormulation(index);
       }
       return false;
