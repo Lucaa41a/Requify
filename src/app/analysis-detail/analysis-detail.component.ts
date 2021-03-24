@@ -9,8 +9,11 @@ import { ReqService } from '../req.service';
 })
 export class AnalysisDetailComponent implements OnInit {
 
+  checked;
+
   constructor(public analysisService: AnalysisService, public reqService: ReqService) {}
   ngOnInit(): void {
+    this.checked = false;
   }
 
   format(value){
@@ -26,32 +29,26 @@ export class AnalysisDetailComponent implements OnInit {
   verify(row, index){
     var variableString = "";
     var feasible = true;
-    var reqSelected = 0;
-    var checked = false;
     for (var i = 0; i< row.length; i++){
       if(row[i]=="" || row[i]==="NA"){           //the solution is not complete so it's not verified
         return false;
       }      
-      if( isNaN(row[i]) ){
+      if( isNaN(row[i]) ){                       // if it's not a number, set null
         variableString = variableString + "var " +this.analysisService.header[i] +"="+ "null" + ";";
       } else{
         variableString = variableString + "var "+ this.analysisService.header[i] +"="+ row[i] + ";";
       }    
-      
-   //   variableString = variableString + "var "+ this.analysisService.header[i] +"="+ row[i] + ";";
     }
     variableString = variableString.replace(/,/g, ".");
    
     for ( var i = 0; i < this.reqService.requirements.length; i++){
       if (this.reqService.requirements[i].selected){
-        reqSelected++;
-        checked = false;
         for (var j in this.reqService.requirements[i].constraints){
-          // check if the constrait has a correct formulation only in the first row, supposing that all rows have the same formulation
-          if(j=="0"){
-            checked = this.check(variableString + this.reqService.requirements[i].constraints[j].value+";", i);
+          // check if the constrait has a correct formulation only in the first row, all rows have the same formulation
+          if(index=="0"){
+            this.checked = this.check(variableString + this.reqService.requirements[i].constraints[j].value+";", i);
           }
-          if( checked ){
+          if( this.checked ){
             feasible = feasible && eval(variableString + this.reqService.requirements[i].constraints[j].value+";");
           } else {
             feasible = false;
@@ -59,11 +56,14 @@ export class AnalysisDetailComponent implements OnInit {
         }
       }
     }
+    if(index == this.analysisService.analysis.length){
+      this.checked = false;
+    }
     return feasible;
   }
 
 
-  // check if the string can be evaluated and if it can't alert the user, only for the first row
+  // check if the string can be evaluated and if it can't alert the user
   check( stringEval:string, index:number){
     try{
       var check = eval(stringEval);
