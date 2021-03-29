@@ -11,7 +11,7 @@ import { ReqService } from './req.service';
 
 export class AppComponent {
   title = 'Requify';
-  detailSelected:Object = null;
+  detailSelected:number = null;
   showAnalysis:boolean = false;
   sessionList = [];
   

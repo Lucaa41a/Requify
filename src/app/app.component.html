@@ -54,7 +54,7 @@
                 <h2>Dettagli</h2>
             </soul-board>
             <soul-lift>
-                <app-req-detail *ngIf="!showAnalysis" [detail]="detailSelected"></app-req-detail>
+                <app-req-detail *ngIf="!showAnalysis" [detailId]="detailSelected"></app-req-detail>
                 <app-analysis-detail *ngIf="showAnalysis"></app-analysis-detail>
             </soul-lift>
         </soul-shelf>

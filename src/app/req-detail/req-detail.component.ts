@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ReqService } from '../req.service';
 
 @Component({
   selector: 'app-req-detail',
@@ -6,11 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./req-detail.component.scss']
 })
 export class ReqDetailComponent implements OnInit {
-  @Input() detail;
-  constructor() { }
+  @Input() detailId;
+  public detail;
+
+  constructor(public reqService: ReqService) {  }
 
   ngOnInit(): void {
   }
+
 }
 
 

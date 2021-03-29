@@ -9,7 +9,7 @@ export class RequirementComponent implements OnInit {
 
   @Input('reqElement') reqEl:number;
 
-  @Output() detailSelected = new EventEmitter<Object>();
+  @Output() detailSelected = new EventEmitter<number>();
 
   req;
 
@@ -19,7 +19,8 @@ export class RequirementComponent implements OnInit {
     }
 
   showDetail(){
-    this.detailSelected.emit(this.reqService.requirements[this.reqEl]);
+    this.detailSelected.emit(this.reqEl);
+ 
   }
 
   getStyle(){

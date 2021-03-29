@@ -16,7 +16,13 @@ export class AnalysisService {
           } else {
             this.analysis.push(data[i]);
           }
-          
+        }
+        // check if the last row is empty
+        if(this.header[this.header.length-1] == ""){
+          this.header = this.header.slice(0, -1);
+          for(var i=0; i<this.analysis.length; i++){
+            this.analysis[i] = this.analysis[i].slice(0, -1);
+          }
         }
     }
 
