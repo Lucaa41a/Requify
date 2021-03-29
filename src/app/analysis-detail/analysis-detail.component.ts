@@ -13,7 +13,7 @@ export class AnalysisDetailComponent implements OnInit {
 
   constructor(public analysisService: AnalysisService, public reqService: ReqService) {}
   ngOnInit(): void {
-    this.checked = false;
+    this.checked = true;
   }
 
   format(value){
@@ -41,12 +41,16 @@ export class AnalysisDetailComponent implements OnInit {
     }
     variableString = variableString.replace(/,/g, ".");
    
+    if(index=="0"){
+      this.checked = true;
+    }
+
     for ( var i = 0; i < this.reqService.requirements.length; i++){
       if (this.reqService.requirements[i].selected){
         for (var j in this.reqService.requirements[i].constraints){
           // check if the constrait has a correct formulation only in the first row, all rows have the same formulation
           if(index=="0"){
-            this.checked = this.check(variableString + this.reqService.requirements[i].constraints[j].value+";", i);
+            this.checked = this.checked && this.check(variableString + this.reqService.requirements[i].constraints[j].value+";", i);
           }
           if( this.checked ){
             feasible = feasible && eval(variableString + this.reqService.requirements[i].constraints[j].value+";");
