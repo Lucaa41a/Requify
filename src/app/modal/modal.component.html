@@ -1,18 +1,51 @@
-<soul-modal title="Configura una nuova analisi" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
+<soul-modal title="Scarica una nuona analisi" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
     <soul-modal-content>
         <div class="l-flag">
             <div class="l-flag__body">
-                <p>Seleziona i parametri</p>
+                <p>Cerca analisi per nome progetto</p>
+                <input #projNameSearch type="text" placeholder="Nome del progetto">
+                <input type="button" value="Search" (click)="search(projNameSearch.value)">
             </div>
         </div>
+        <fieldset class="soul-choice-list  soul-choice-list--separated" *ngIf="show">
+            <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of proj" (click)="selected = item.id">
+                <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
+                <label class="soul-choice__box" for={{item.id}}>
+                <div class="soul-choice__title">
+                  <span class="soul-font-size-m h-text-bold">{{item.name}}</span>
+                </div>
+                <span class="soul-choice__indicator"></span>
+                <div class="soul-choice__description">
+                  Username creatore: {{item.creator.userName}}
+                </div>
+                <div class="soul-choice__additional-content">
+                  Id: {{item.id}}
+                </div>
+              </label>
+            </div>
+            <button class="a-button" (click)="carica()">Carica File</button>
+        </fieldset>
+
+
+        <!--
+        <div class="l-flag">
+            <div class="l-flag__body">
+                <p>Oppure inserisci l'id</p>
+                   <input #key type="text" placeholder="Key">
+                <input #session type="text" placeholder="Session">
+                <input type="button" value="Go" (click)="go()">
+                <div>{{data}}</div>
+            </div>
+        </div>
+-->
     </soul-modal-content>
+
     <soul-modal-footer>
-        <div class="soul-button-group  soul-button-group--separated">
-            <button class="a-button  a-button--primary" (click)="close()">Ok</button>
+        <div>
             <button class="a-button  a-button--ghost" (click)="close()">Annulla</button>
         </div>
     </soul-modal-footer>
 </soul-modal>
 
 
-<p>Oppure inizia una<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">nuova analisi</strong></p>
+<p>Oppure scarica una<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">nuova analisi</strong></p>

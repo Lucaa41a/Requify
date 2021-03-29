@@ -76,7 +76,6 @@ export class AnalysisDetailComponent implements OnInit {
       if(mess[2]+mess[3] === "notdefined"){          
         this.addMissingParam(mess[0], index);
       } else {
-        console.log(stringEval);
         this.errorFormulation(index);
       }
       return false;
