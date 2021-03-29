@@ -8,7 +8,7 @@
             </div>
         </div>
         <fieldset class="soul-choice-list  soul-choice-list--separated" *ngIf="show">
-            <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of proj" (click)="selected = item.id">
+            <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of sessionList" (click)="selected = item.id">
                 <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
                 <label class="soul-choice__box" for={{item.id}}>
                 <div class="soul-choice__title">

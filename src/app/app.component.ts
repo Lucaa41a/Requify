@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'Requify';
   detailSelected:Object = null;
   showAnalysis:boolean = false;
+  sessionList = [];
   
   constructor(public reqService: ReqService, public analysisService:AnalysisService){};
 

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 import { ApiKey, NgVoltaApiAuthenticationService, NgVoltaApiService } from '@proservices/ng-volta-api';
 
 @Component({
@@ -10,8 +10,10 @@ import { ApiKey, NgVoltaApiAuthenticationService, NgVoltaApiService } from '@pro
 export class ModalComponent {
   public data = "";
   public proj=[];
+  @Input() sessionList;
   public show = false;
   public selected = "";
+  @Output() sessionListEvent = new EventEmitter<Object>();
   key = "0ee574dd-e38b-49d9-9a9c-dd05b9393cb4";
   ses = "86d527d8-18a8-445f-ba42-6dfec70b5928";
   file = "fa683e84-e0a2-4f42-9de4-857d5c38ffbe";
@@ -50,6 +52,7 @@ export class ModalComponent {
           temp.push(items[i]);
           this.proj = temp;
           this.show = true;
+          this.sessionListEvent.emit(temp);
         }
       }
     });

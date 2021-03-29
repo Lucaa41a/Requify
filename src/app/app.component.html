@@ -38,7 +38,7 @@
                 <div *ngIf="analysisService.analysis.length==0">
                     <p>Seleziona il file csv da caricare</p>
                     <app-read-file [type]="'csv'"></app-read-file>
-                    <doc-modal-neutral></doc-modal-neutral>
+                    <doc-modal-neutral (sessionListEvent)="sessionList = $event" [sessionList]="sessionList"></doc-modal-neutral>
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
                     <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
