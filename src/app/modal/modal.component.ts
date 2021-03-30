@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 import { ApiKey, NgVoltaApiAuthenticationService, NgVoltaApiService } from '@proservices/ng-volta-api';
+import { AnalysisService } from '../analysis.service';
+import { parse } from 'papaparse';
 
 @Component({
   selector: 'doc-modal-neutral',
@@ -20,13 +22,13 @@ export class ModalComponent {
   model = "5e7ea0ff-681d-460e-8aff-4e9c6b6eeec3";
   projID = "1683a68e-30c3-40b9-b906-31cf63d52a16";
 
-  constructor(private authService: NgVoltaApiAuthenticationService, private voltaApiService: NgVoltaApiService) {
+  constructor(private authService: NgVoltaApiAuthenticationService, private voltaApiService: NgVoltaApiService, private analysisService: AnalysisService) {
   }
 
   go() {
     this.authService.login(new ApiKey(this.key), false) // ApiKey
       .subscribe((out) => console.log(out));
-    // this.voltaApiService.getSessionData(session).subscribe((session) => { session.text().then((data) => this.data = data);     })
+   //  this.voltaApiService.getSessionData(this.ses).subscribe((session) => { session.text().then((data) => this.data = data);     })
     //this.voltaApiService.getSession(this.ses).subscribe((session) => { console.log(session);   })         // funziona
     //this.voltaApiService.getDOESessionsByModelId(this.model).subscribe((session) => {console.log(session);   }) 
 
@@ -35,7 +37,7 @@ export class ModalComponent {
 
  //   this.voltaApiService.getMyFiles().subscribe((session) => { console.log(session)});
 
-    this.voltaApiService.search("beam").subscribe((item) => {console.log(item)});
+  //  this.voltaApiService.search("beam").subscribe((item) => {console.log(item)});
 
       
   }
@@ -61,18 +63,35 @@ export class ModalComponent {
 
   carica(){
     console.log(this.selected);
-    /*
+    
     this.authService.login(new ApiKey(this.key), false) // ApiKey
       .subscribe((out) => console.log(out));
     this.voltaApiService.getSessionData(this.selected)
       .subscribe((session) => {
         session.text().then((data) => {
-          this.data = data;
-          console.log(data);
-          // salvare nel service l'analisi
+          parse(data, {
+            complete: (results) => {
+              console.log(results);
+              this.analysisService.addData(results.data);
+              console.log(this.analysisService.analysis);
+            }
+          });
         });
       })
-      */
+        
+  }
+
+  download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
   }
   
 

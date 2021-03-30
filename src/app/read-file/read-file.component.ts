@@ -46,6 +46,7 @@ export class ReadFileComponent implements OnInit {
         if(this.split[this.split.length-1]=="csv"){     // it's a result file
           parse(this.file, {
             complete: (results) => {
+              console.log(results);
               this.analysisService.addData(results.data);
               console.log(this.analysisService.analysis);
             }
