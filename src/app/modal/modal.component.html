@@ -3,11 +3,13 @@
         <div class="l-flag">
             <div class="l-flag__body">
                 <p>Cerca analisi per nome progetto</p>
+                <div class="soul-space-stack-top-xs"></div>
                 <input #projNameSearch type="text" placeholder="Nome del progetto">
-                <input type="button" value="Search" (click)="search(projNameSearch.value)">
+                <button class="a-button a-button--primary" style="float: right" (click)="search(projNameSearch.value)">Cerca</button>
             </div>
         </div>
         <fieldset class="soul-choice-list  soul-choice-list--separated" *ngIf="show">
+            <div class="soul-space-stack-top-xs"></div>
             <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of sessionList" (click)="selected = item.id">
                 <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
                 <label class="soul-choice__box" for={{item.id}}>
@@ -23,26 +25,15 @@
                 </div>
               </label>
             </div>
-            <button class="a-button" (click)="carica()">Carica File</button>
+            <div class="soul-space-stack-top-xs"></div>
+            <button class="a-button a-button--primary" (click)="carica()" style="float: right">Carica File</button>
         </fieldset>
 
-
-        <!--
-        <div class="l-flag">
-            <div class="l-flag__body">
-                <p>Oppure inserisci l'id</p>
-                   <input #key type="text" placeholder="Key">
-                <input #session type="text" placeholder="Session">
-                <input type="button" value="Go" (click)="go()">
-                <div>{{data}}</div>
-            </div>
-        </div>
--->
     </soul-modal-content>
 
     <soul-modal-footer>
         <div>
-            <button class="a-button  a-button--ghost" (click)="close()">Annulla</button>
+            <button class="a-button  a-button--default" (click)="close()">Annulla</button>
         </div>
     </soul-modal-footer>
 </soul-modal>
