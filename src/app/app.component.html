@@ -24,7 +24,9 @@
                 <app-modal-select-req *ngIf="reqService.requirements.length > 0"></app-modal-select-req>
                 <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
                 <div class="soul-space-stack-top-xs"> </div>
-                <app-requirement *ngFor="let req of reqService.requirements; let i = index" [reqElement]="i" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
+                <div style="overflow: auto; height: 45vh;" *ngIf="reqService.requirements.length > 0">
+                    <app-requirement *ngFor="let req of reqService.requirements; let i = index" [reqElement]="i" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
+                </div>
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:40px;">
@@ -55,7 +57,7 @@
         <div class="soul-space-stack-top-xs"> </div>
     </aside>
     <div class="soul-space-stack-top-xs"> </div>
-    <main class="t-m__content h-y-auto-scroll  h-shadow-s" style="height:98vh;">
+    <main class="t-m__content h-y-auto-scroll  h-shadow-s" style="height:97vh;">
 
         <soul-shelf class="h-shadow-m">
             <soul-board class="h-shadow-s" style="height:40px;">
