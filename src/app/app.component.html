@@ -1,7 +1,9 @@
-<app-tree-navigation *ngIf="reqService.requirements.length > 1110"></app-tree-navigation>
-<div class="l-grid  l-grid--narrow soul-space-inset-m">
-    <div class="l-grid__item  l-one-third">
-        <soul-shelf class="h-shadow-m" style="height:95vh;">
+<!-- <app-tree-navigation *ngIf="reqService.requirements.length > 1110"></app-tree-navigation> -->
+<section class="t-m">
+
+    <aside class="t-m__left  h-shadow-s" style="width: 25vw; height:98vh;">
+        <div class="soul-space-stack-top-xs"> </div>
+        <soul-shelf class="h-shadow-m">
             <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Requisiti</h2>
 
@@ -16,10 +18,13 @@
                 </div>
 
             </soul-board>
+
             <soul-lift style="height:50vh;">
-                <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
-                <app-requirement *ngFor="let req of reqService.requirements; let i = index" [reqElement]="i" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
+                <div class="soul-space-stack-top-xs"> </div>
                 <app-modal-select-req *ngIf="reqService.requirements.length > 0"></app-modal-select-req>
+                <app-read-file *ngIf="reqService.requirements.length == 0" [type]="'XML'"></app-read-file>
+                <div class="soul-space-stack-top-xs"> </div>
+                <app-requirement *ngFor="let req of reqService.requirements; let i = index" [reqElement]="i" (detailSelected)="detailSelected = $event; showAnalysis = false "></app-requirement>
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:40px;">
@@ -34,31 +39,34 @@
                     </div>
                 </div>
             </soul-board>
-            <soul-lift style="height:35vh;">
+            <soul-lift style="height:25vh;">
+                <div class="soul-space-stack-top-xs"> </div>
                 <div *ngIf="analysisService.analysis.length==0">
                     <p>Seleziona il file csv da caricare</p>
                     <app-read-file [type]="'csv'"></app-read-file>
+                    <div class="soul-space-stack-top-xs"> </div>
                     <doc-modal-neutral (sessionListEvent)="sessionList = $event" [sessionList]="sessionList"></doc-modal-neutral>
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
                     <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
-
                 </div>
             </soul-lift>
         </soul-shelf>
-    </div>
+        <div class="soul-space-stack-top-xs"> </div>
+    </aside>
+    <div class="soul-space-stack-top-xs"> </div>
+    <main class="t-m__content h-y-auto-scroll  h-shadow-s" style="height:98vh;">
 
-    <div class="l-grid__item  l-one-half">
-        <soul-shelf class="h-shadow-m" style="height:95vh;">
-            <soul-board class="h-shadow-s">
+        <soul-shelf class="h-shadow-m">
+            <soul-board class="h-shadow-s" style="height:40px;">
                 <h2>Dettagli</h2>
             </soul-board>
             <soul-lift>
+                <div class="soul-space-stack-top-xs"> </div>
                 <app-req-detail *ngIf="!showAnalysis" [detailId]="detailSelected"></app-req-detail>
                 <app-analysis-detail *ngIf="showAnalysis"></app-analysis-detail>
             </soul-lift>
         </soul-shelf>
+    </main>
 
-
-    </div>
-</div>
+</section>
