@@ -1,5 +1,5 @@
 <div>
-    <p *ngIf="type=='XML'">Seleziona il file {{type}} dal quale vuoi leggere i Requirements.</p>
+    <p *ngIf="type=='XML'">Seleziona il file {{type}} dal quale vuoi leggere i requisiti.</p>
     <p *ngIf="type=='json'">Seleziona il file {{type}} dal quale vuoi leggere i risultati.</p>
     <input type='file' (change)="fileChanged($event)">
     <button class="a-button a-button--primary" (click)="loadFile()">Carica</button>

@@ -25,23 +25,6 @@ export class ModalComponent {
   constructor(private authService: NgVoltaApiAuthenticationService, private voltaApiService: NgVoltaApiService, private analysisService: AnalysisService) {
   }
 
-  go() {
-    this.authService.login(new ApiKey(this.key), false) // ApiKey
-      .subscribe((out) => console.log(out));
-   //  this.voltaApiService.getSessionData(this.ses).subscribe((session) => { session.text().then((data) => this.data = data);     })
-    //this.voltaApiService.getSession(this.ses).subscribe((session) => { console.log(session);   })         // funziona
-    //this.voltaApiService.getDOESessionsByModelId(this.model).subscribe((session) => {console.log(session);   }) 
-
-   // this.voltaApiService.getProjectModels(this.projID).subscribe((session) => { console.log(session);   })      // l'item non è un project
-   // this.voltaApiService.getItem(this.projID).subscribe((item) => {console.log(item)});                         // l'item è un project
-
- //   this.voltaApiService.getMyFiles().subscribe((session) => { console.log(session)});
-
-  //  this.voltaApiService.search("beam").subscribe((item) => {console.log(item)});
-
-      
-  }
-
   search(projName : string){
  //   this.proj = projName;
     this.authService.login(new ApiKey(this.key), false) // ApiKey
@@ -79,19 +62,6 @@ export class ModalComponent {
         });
       })
         
-  }
-
-  download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
   }
   
 

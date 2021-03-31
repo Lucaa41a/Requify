@@ -2,17 +2,14 @@
     <table class="soul-table soul-table--hoverable soul-table--regular">
         <thead>
             <tr>
-                <!--
-                <th class="soul-table-cell  soul-table-cell--header">
-                    <div class="soul-table-header"></div>
-                </th>
-                    -->
-
                 <th *ngFor="let header of analysisService.header" class="soul-table-cell  soul-table-cell--header">
-                    <button class="soul-table-header  soul-table-header--sortable  is-sort-none">
+                    <div class="soul-table-header">
+                        <span class="soul-table-header__title">{{header}}</span>
+                    </div>
+                    <!-- <button class="soul-table-header  soul-table-header--sortable  is-sort-none">
                         <span class="soul-table-header__title">{{header}}</span>
                         <span class="soul-table-header__sort-indicator"></span>
-                    </button>
+                    </button>-->
                 </th>
 
             </tr>
@@ -20,15 +17,6 @@
         <tbody>
 
             <tr *ngFor="let row of analysisService.analysis; let i = index " class="soul-table-row" [ngStyle]="verify(row, i)?{}:{'background-color':'hsl(45, 90%, 88%)'}">
-                <!--
-                <td class="soul-table-cell">
-                    <label class="c-checkbox">
-                        <input type="checkbox" name="mountains" value="empty" class="c-checkbox__input">
-                        <div class="c-checkbox__check"></div>
-                    </label>
-                </td>
-                -->
-
                 <td *ngFor="let value of row" class="soul-table-cell">
                     {{format(value)}}
                 </td>
