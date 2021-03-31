@@ -10,20 +10,23 @@
         </div>
         <fieldset class="soul-choice-list  soul-choice-list--separated" *ngIf="show">
             <div class="soul-space-stack-top-xs"></div>
-            <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of sessionList" (click)="selected = item.id">
-                <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
-                <label class="soul-choice__box" for={{item.id}}>
-                <div class="soul-choice__title">
-                  <span class="soul-font-size-m h-text-bold">{{item.name}}</span>
+            <div style="overflow: auto;">
+                <!-- meaby fix the scroll when there are a lot of sessions, need more sessions to test-->
+                <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of sessionList" (click)="selected = item.id">
+                    <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
+                    <label class="soul-choice__box" for={{item.id}}>
+                        <div class="soul-choice__title">
+                            <span class="soul-font-size-m h-text-bold">{{item.name}}</span>
+                        </div>
+                        <span class="soul-choice__indicator"></span>
+                        <div class="soul-choice__description">
+                            Username creatore: {{item.creator.userName}}
+                        </div>
+                        <div class="soul-choice__additional-content">
+                            Id: {{item.id}}
+                        </div>
+                    </label>
                 </div>
-                <span class="soul-choice__indicator"></span>
-                <div class="soul-choice__description">
-                  Username creatore: {{item.creator.userName}}
-                </div>
-                <div class="soul-choice__additional-content">
-                  Id: {{item.id}}
-                </div>
-              </label>
             </div>
             <div class="soul-space-stack-top-xs"></div>
             <button class="a-button a-button--primary" (click)="carica()" style="float: right">Carica File</button>
