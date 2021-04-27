@@ -17,13 +17,24 @@ export class AnalysisDetailComponent implements OnInit {
   }
 
   format(value){
-    var numb;
-    numb = Math.round(parseFloat(value)*100)/100;
+    var numb = parseFloat(value);
+    var length = (numb + '').replace('.', '').length;  // for floats
+    if(length>4 && numb){
+      return  numb.toPrecision(4)
+    } else {
+      return value;
+    }
+
+    
+   /*
+    console.log( parseFloat(value).toPrecision(4) )
+    
     if(numb){
       return numb;
     } else {
       return value;
     }
+    */
   }
 
   verify(row, index){

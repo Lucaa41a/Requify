@@ -1,8 +1,8 @@
-<soul-modal title="Scarica una nuona analisi" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
+<soul-modal title="Scarica dei nuovi risultati" type="neutral" [isOpen]="isModalOpen" (closeEnded)="executeWhenCloseAnimationEnds()">
     <soul-modal-content>
         <div class="l-flag">
             <div class="l-flag__body">
-                <p>Cerca analisi per nome progetto</p>
+                <p>Cerca i risultati per nome progetto</p>
                 <div class="soul-space-stack-top-xs"></div>
                 <input #projNameSearch type="text" placeholder="Nome del progetto">
                 <button class="a-button a-button--primary" style="float: right" (click)="search(projNameSearch.value)">Cerca</button>
@@ -29,17 +29,17 @@
                 </div>
             </div>
             <div class="soul-space-stack-top-xs"></div>
-            <button class="a-button a-button--primary" (click)="carica()" style="float: right">Carica File</button>
         </fieldset>
 
     </soul-modal-content>
 
     <soul-modal-footer>
         <div>
+            <button *ngIf="show" class="a-button a-button--primary" (click)="carica()">Carica File</button>
             <button class="a-button  a-button--default" (click)="close()">Annulla</button>
         </div>
     </soul-modal-footer>
 </soul-modal>
 
 
-<p>Oppure scarica una<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">nuova analisi</strong></p>
+<p>Oppure scarica dei<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">nuovi risultati</strong></p>

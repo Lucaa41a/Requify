@@ -30,7 +30,7 @@
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:35px;">
-                <h2>Analisi</h2>
+                <h2>Risultati</h2>
                 <div style="float:right" *ngIf="analysisService.analysis.length>0">
                     <div class="m-field">
                         <div class="m-field__value">
@@ -44,10 +44,10 @@
             <soul-lift style="height:25vh;">
                 <div class="soul-space-stack-top-xs"> </div>
                 <div *ngIf="analysisService.analysis.length==0">
-                    <p>Seleziona il file csv da caricare</p>
+                    <p>Seleziona il file csv con i risultati da caricare</p>
                     <app-read-file [type]="'csv'"></app-read-file>
                     <div class="soul-space-stack-top-xs"> </div>
-                    <doc-modal-neutral (sessionListEvent)="sessionList = $event" [sessionList]="sessionList"></doc-modal-neutral>
+                    <doc-modal-results (sessionListEvent)="sessionList = $event" [sessionList]="sessionList"></doc-modal-results>
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
                     <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
