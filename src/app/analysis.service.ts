@@ -9,7 +9,6 @@ export class AnalysisService {
 
     addData(data:any){
         this.header = data[0];
-        console.log(data.length);
         for(var i=1; i< data.length; i++){
           if(data[i]==""){
             // this row is empty
