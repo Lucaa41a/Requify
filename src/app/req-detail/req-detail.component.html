@@ -2,13 +2,13 @@
     <h3>{{reqService.requirements[detailId].name}}</h3>
     <p>{{reqService.requirements[detailId].text}}</p>
     <div *ngIf="reqService.requirements[detailId].constraints.length >0">
-        <h4 class="soul-space-stack-top-m">Vincoli</h4>
+        <h4 class="soul-space-stack-top-m">Constraints</h4>
         <ul *ngFor="let c of reqService.requirements[detailId].constraints" class="l-block-list">
             <li class="l-block-list__item"> {{c.name}}: {{c.value}}</li>
         </ul>
     </div>
     <div *ngIf="reqService.requirements[detailId].missingParam.length>0">
-        <h4 class="soul-space-stack-top-m">Parametri mancanti</h4>
+        <h4 class="soul-space-stack-top-m">Missing parameters</h4>
         <ul *ngFor="let param of reqService.requirements[detailId].missingParam" class="l-block-list">
             <li class="l-block-list__item">{{param}}</li>
         </ul>

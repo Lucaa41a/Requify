@@ -2,16 +2,15 @@
     <soul-modal-content>
         <div class="l-flag">
             <div class="l-flag__body">
-                <p>Cerca i risultati per nome progetto</p>
+                <p>Find results by project name</p>
                 <div class="soul-space-stack-top-xs"></div>
-                <input #projNameSearch type="text" placeholder="Nome del progetto">
-                <button class="a-button a-button--primary" style="float: right" (click)="search(projNameSearch.value)">Cerca</button>
+                <input #projNameSearch type="text" placeholder="Project name">
+                <button class="a-button a-button--primary" style="float: right" (click)="search(projNameSearch.value)">Search</button>
             </div>
         </div>
         <fieldset class="soul-choice-list  soul-choice-list--separated" *ngIf="show">
             <div class="soul-space-stack-top-xs"></div>
             <div style="overflow: auto;">
-                <!-- meaby fix the scroll when there are a lot of sessions, need more sessions to test-->
                 <div class="soul-choice  soul-choice--comfortable" *ngFor="let item of sessionList" (click)="selected = item.id">
                     <input name="choice-separated" type="radio" class="soul-choice__input" id={{item.id}}>
                     <label class="soul-choice__box" for={{item.id}}>
@@ -20,7 +19,7 @@
                         </div>
                         <span class="soul-choice__indicator"></span>
                         <div class="soul-choice__description">
-                            Username creatore: {{item.creator.userName}}
+                            Owner username: {{item.creator.userName}}
                         </div>
                         <div class="soul-choice__additional-content">
                             Id: {{item.id}}
@@ -35,11 +34,11 @@
 
     <soul-modal-footer>
         <div>
-            <button *ngIf="show" class="a-button a-button--primary" (click)="carica()">Carica File</button>
-            <button class="a-button  a-button--default" (click)="close()">Annulla</button>
+            <button *ngIf="show" class="a-button a-button--primary" (click)="carica()">Load File</button>
+            <button class="a-button  a-button--default" (click)="close()">Cancel</button>
         </div>
     </soul-modal-footer>
 </soul-modal>
 
 
-<p>Oppure scarica dei<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">nuovi risultati</strong></p>
+<p>Download<strong (click)="open()" style="color:rgb(35, 35, 161);" class="l-block-list__item h-cursor-pointer">new results</strong></p>

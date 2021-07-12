@@ -5,7 +5,7 @@
         <div class="soul-space-stack-top-xs"> </div>
         <soul-shelf class="h-shadow-m">
             <soul-board class="h-shadow-s" style="height:35px;">
-                <h2>Requisiti</h2>
+                <h2>Requirements</h2>
 
                 <div style="float:right" *ngIf="reqService.requirements.length > 0">
                     <div class="m-field">
@@ -30,7 +30,7 @@
             </soul-lift>
 
             <soul-board class="h-shadow-s" style="height:35px;">
-                <h2>Risultati</h2>
+                <h2>Results</h2>
                 <div style="float:right" *ngIf="analysisService.analysis.length>0">
                     <div class="m-field">
                         <div class="m-field__value">
@@ -44,13 +44,13 @@
             <soul-lift style="height:25vh;">
                 <div class="soul-space-stack-top-xs"> </div>
                 <div *ngIf="analysisService.analysis.length==0">
-                    <p>Seleziona il file csv con i risultati da caricare</p>
+                    <p>Select the csv file with the results</p>
                     <app-read-file [type]="'csv'"></app-read-file>
                     <div class="soul-space-stack-top-xs"> </div>
                     <doc-modal-results (sessionListEvent)="sessionList = $event" [sessionList]="sessionList"></doc-modal-results>
                 </div>
                 <div *ngIf="analysisService.analysis.length>0">
-                    <button class="a-button a-button--primary" (click)="showAnalysis = true">Visualizza i risultati</button>
+                    <button class="a-button a-button--primary" (click)="showAnalysis = true">Show the results</button>
                 </div>
             </soul-lift>
         </soul-shelf>
@@ -61,7 +61,7 @@
 
         <soul-shelf class="h-shadow-m">
             <soul-board class="h-shadow-s" style="height:35px;">
-                <h2>Dettagli</h2>
+                <h2>Details</h2>
             </soul-board>
             <soul-lift>
                 <div class="soul-space-stack-top-xs"> </div>
